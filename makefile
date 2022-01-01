@@ -1,10 +1,10 @@
 CC=gcc
 FLAGS= -Wall -g
 
-all: test
+all: graph
 
-test: main.o
-	$(CC) $(FLAGS) -o test main.o -lm
+graph: main.o
+	$(CC) $(FLAGS) -o graph main.o -lm
 
 main.o: main.c
 	$(CC) $(FLAGS) -c main.c -lm
@@ -14,4 +14,4 @@ main.o: main.c
 
 
 clean:
-	rm -f *.o test main.o
+	rm -f *.o graph main.o
