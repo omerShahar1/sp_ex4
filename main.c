@@ -1,6 +1,6 @@
 # include <stdio.h>
 # include <stdlib.h>
-# define MAX 999999
+#include <limits.h>
 # define true -1
 # define false -2
 
@@ -45,7 +45,7 @@ int findEdgeWeight(struct Node** graph, int u, int v) //find the edge from src t
 
 int minDistance(const int dist[], const int visited[], int V)
 {
-    int min = MAX, min_index;
+    int min = INT_MAX, min_index;
     for (int v = 0; v < V; v++)
         if (visited[v] == false && dist[v] <= min)
         {
@@ -75,7 +75,7 @@ int dijkstra(struct Node** graph, int s, int d)
     int *visited = (int*)malloc(size * sizeof(int));
     for (i = 0; i < size; i++) //zero all arrays.
     {
-        dist[i] = MAX;
+        dist[i] = INT_MAX;
         visited[i] = false;
     }
     dist[src] = 0;
@@ -86,14 +86,14 @@ int dijkstra(struct Node** graph, int s, int d)
         for (v = 0; v < size; v++)
         {
             weight = findEdgeWeight(graph, u, v);
-            if ((visited[v] == false) && (weight != -1) && (dist[u] != MAX) && (dist[u] + weight < dist[v]))
+            if ((visited[v] == false) && (weight != -1) && (dist[u] != INT_MAX) && (dist[u] + weight < dist[v]))
                 dist[v] = dist[u] + weight;
         }
     }
     weight = dist[dest]; //final answer
     free(dist); //free memory
     free(visited);//free memory
-    if(weight == MAX) //if there is no path the value of weight will be MAX, so we will return -1.
+    if(weight == INT_MAX) //if there is no path the value of weight will be INT_MAX, so we will return -1.
         return -1;
     return weight;
 }
@@ -101,7 +101,7 @@ int dijkstra(struct Node** graph, int s, int d)
 int TSP(struct Node** graph, int list[], int size)
 {
     int i, j, z;
-    int answer = MAX, srcWeight, weight, tempWeight;
+    int answer = INT_MAX, srcWeight, weight, tempWeight;
     int src, newSrc, newSrcIndex;
     int stop = false; //used to signal when to stop checking specific src route
     int *visited = (int*)malloc(size * sizeof(int));
@@ -116,7 +116,7 @@ int TSP(struct Node** graph, int list[], int size)
         stop = false;
         for(j=0; j<size-1; j++)
         {
-            weight = MAX;
+            weight = INT_MAX;
             for (z=0; z<size; z++) //check the best node to go to from current node
             {
                 if(visited[z] == true) //node wont have an edge to itself so we will skip it.
@@ -145,7 +145,7 @@ int TSP(struct Node** graph, int list[], int size)
         if(stop == false && srcWeight < answer)
             answer = srcWeight;
     }
-    if(answer == MAX)
+    if(answer == INT_MAX)
         return -1;
     free(visited);
     return answer;
@@ -242,8 +242,6 @@ void newEdge(struct Node** graph, int src, int dest, int weight) //add new edge 
     first->out = new_edge;
 }
 
-
-/*********************** main *************/
 int main()
 {
     int flag=false; //false means we don't have the new command input. true means we do have.
@@ -260,7 +258,7 @@ int main()
     graph->next = NULL;
 
 
-    while(1) //endless loop.
+    while(ch!='P')
     {
         if(flag == false) //means we need to get new command.
         {
