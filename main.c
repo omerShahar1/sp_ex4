@@ -242,6 +242,8 @@ void newEdge(struct Node** graph, int src, int dest, int weight) //add new edge 
     first->out = new_edge;
 }
 
+
+/*********************** main *************/
 int main()
 {
     int flag=false; //false means we don't have the new command input. true means we do have.
