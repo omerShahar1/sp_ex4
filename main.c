@@ -260,7 +260,7 @@ int main()
     graph->next = NULL;
 
 
-    while(ch!='P')
+    while(1) //endless loop.
     {
         if(flag == false) //means we need to get new command.
         {
