@@ -383,7 +383,7 @@ int main()
             scanf(" %d", &pathSrc);
             scanf(" %d", &pathDest);
             weight = dijkstra(&graph, pathSrc, pathDest);
-            printf("Dijsktra shortest path: %d\n", weight);
+            printf("Dijsktra shortest path: %d \n", weight);
 
             scanf(" %c", &command);
             flag = true;
@@ -400,7 +400,7 @@ int main()
                 list[i] = id;
             }
             weight = TSP(&graph, list, sizeInput);
-            printf("TSP shortest path: %d\n", weight);
+            printf("TSP shortest path: %d \n", weight);
             free(list);
 
             scanf(" %c", &command);
