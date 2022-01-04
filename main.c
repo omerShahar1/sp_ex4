@@ -258,13 +258,16 @@ int main()
     graph->next = NULL;
 
 
-    while(ch!='P')
-    {
+    while(1)
+    {   
         if(flag == false) //means we need to get new command.
         {
             scanf(" %c", &command);
             flag=true;
         }
+
+        if(getchar()==EOF)
+            break;
 
         if (command == 'A') //making new graph
         {
@@ -403,6 +406,14 @@ int main()
             scanf(" %c", &command);
             flag = true;
         }
+    }
+
+    while(graph != NULL) //we wull remove all the graph data. go over all the nodes, remove them and the edges coming out of them.
+    {
+        tempNode = graph;
+        removeNodeOutEdges(graph);
+        graph = graph->next;
+        free(tempNode);
     }
     return 0;
 }
